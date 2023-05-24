@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public GameManager gameManager;
     public Sprite regularSprite;
     public Sprite deadSprite;
+    public bool isPowered = false;
+    public Sprite normalSprite;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;

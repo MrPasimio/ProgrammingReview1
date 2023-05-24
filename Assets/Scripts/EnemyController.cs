@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     public GameManager gameManager;
 
     private Rigidbody2D rb;
+    private bool isFrozen = false;
 
     private void Start()
     {
@@ -28,11 +29,29 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void FreezeMovement(float duration)
+    {
+        if (!isFrozen)
+        {
+            isFrozen = true;
+
+            StartCoroutine(UnfreezeMovement(duration));
+        }
+    }
+
+    private System.Collections.IEnumerator UnfreezeMovement(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        isFrozen = false;
+    }
+
+
+private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+            Player playerController = collision.gameObject.GetComponent<Player>();
             if (playerController != null && !gameManager.IsPlayerDead())
             {
                 playerController.Die();

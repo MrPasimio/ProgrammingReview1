@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerObject;
     public Sprite regularSprite;
     public Sprite deadSprite;
+    public TextMeshProUGUI playerScoreDisplay;
 
     private bool isPlayerDead = false;
     private bool isGameOver = false;
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
         isPlayerDead = true;
         yield return new WaitForSeconds(delay);
 
-        PlayerController playerController = playerObject.GetComponent<PlayerController>();
+        Player playerController = playerObject.GetComponent<Player>();
         if (playerController != null)
         {
             playerController.Respawn();
